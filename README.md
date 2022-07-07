@@ -14,7 +14,7 @@ Before uploading your image to LUSID, you'll want to build and run it locally, j
 
 ### 3. Upload image to your LUSID account
 
-Once, you're happy with your image, push it up to LUSID. There are a number of commands you'll need to run locally. See this guide for more details:
+Once you're happy with your image, push it up to LUSID. There are a number of commands you'll need to run locally. See this guide for more details:
 
 [How do I upload a Docker image to the FINBOURNE AWS store?](https://support.lusid.com/knowledgebase/article/KA-01698/en-us)
 
@@ -26,7 +26,7 @@ See the [Uploading your Docker image](https://support.lusid.com/knowledgebase/ar
 
 ### 5. Adding LUSID login credentials
 
-As part of the job setup, you'll want to add environment variables with your login credentials. This is what the scheduler will use to authenticate and call the APIs with. 
+As part of the job setup, you'll want to add environment variables with your login credentials. This is what the scheduler will use to authenticate and call the APIs. 
 
 See the [Authenticating to the LUSID Python SDK using environment variables](https://support.lusid.com/knowledgebase/article/KA-01645/#create-job) section.
 

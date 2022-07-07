@@ -1,8 +1,8 @@
 # An example scheduler job in Python
 
-This project contains a sample application which can be packaged into a Docker container for running in the LUSID scheduler. Feel free to use this project as a template. Clone the project, add your own Python application, and then upload your image which can be run in the LUSID scheduler. 
+This project contains a sample application which can be packaged into a Docker container for running in the LUSID [scheduler](https://www.lusid.com/scheduler2/swagger/index.html). Feel free to use this project as a template. Clone the project, add your own Python application, and then upload your image which can be run in the LUSID scheduler. 
 
-Steps:
+For the purposes of this template, our sample application will call some instruments from the [LUSID APIs](https://www.lusid.com/api/swagger/index.html).
 
 ### 1. Install Docker on your local machine
 

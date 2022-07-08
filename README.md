@@ -36,9 +36,46 @@ scheduler-job-example-python
 
 ### 3. Upload image to your LUSID account
 
-Once you're happy with your image, push it up to LUSID. There are a number of commands you'll need to run locally. See this guide for more details:
+Once you're happy with your image, push it up to LUSID. There are two ways:
+
+1. Run the commands one-by-one
+2. Use the `docker_setup.sh` script from this directory which has packaged up the relevant commands into one script
+
+#### 3.1 Run the commands one-by-one
+
+There are 6 commands you'll need to run to build, push, and tag the image. There is a feature in the Web Tool which will generate these commands for you. See more details here:
 
 [How do I upload a Docker image to the FINBOURNE AWS store?](https://support.lusid.com/knowledgebase/article/KA-01698/en-us)
+
+
+#### 3.2 Run the setup script
+
+Alternatively, you can run the `docker_setup.sh` script in this directory, which packages the 6 commands together. To run this script, you will need a `secrets.json` file in the root of this project which looks as follows:
+
+```
+{
+      "apiUrl": "<API_URL>",
+      "schedulerUrl": "<SCHEDULER_URL>",
+      "tokenUrl": "<TOKEN_URL>",
+      "clientId": "<CLIENT_ID>",
+      "clientSecret": "<CLIENT_SECRET>",
+      "username": "<USERNAME>",
+      "password": "<PASSWORD>"
+}
+
+```
+
+With the secrets.json file in place, you can then run:
+
+```
+bash docker_setup.sh -n test -v 0.0.8
+```
+
+The options are as follows:
+
+* `-n` is image name
+* `-v` is image version
+
 
 ### 4. Use the image in a Scheduler job
 

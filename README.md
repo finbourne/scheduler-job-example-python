@@ -73,7 +73,7 @@ Alternatively, you can run the `docker_setup.sh` script in this directory, which
 With the secrets.json file in place, you can then run:
 
 ```
-bash docker_setup.sh -n test -v 0.0.8
+bash docker_setup.sh -n scheduler-job-example-python -v 0.0.8
 ```
 
 The options are as follows:

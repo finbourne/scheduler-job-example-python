@@ -14,7 +14,12 @@ First off, you need to ensure that you have [Docker](https://www.docker.com/) in
 
 Before uploading your image to LUSID, you'll want to build and run it locally, just to check it works ok. Here is the official [Docker Python guide](https://docs.docker.com/language/python/), but there are many tutorials out there for building and running Python images.
 
-Build the image:
+Build the image using the following command.
+
+Two notes on this command:
+
+* You'll need to run it in the same directory as the Dockerfile
+* The `-t` is the image name (defined by you) which will be used in LUSID
 
 ```
 docker build . -t scheduler-job-example-python
@@ -88,6 +93,12 @@ See the "Uploading your Docker image" Section of the following guide for [Creati
 As part of the job setup, you'll want to add environment variables with your login credentials. This is what the scheduler will use to authenticate and call the APIs.
 
 See the [Authenticating to the LUSID Python SDK using environment variables](https://support.lusid.com/knowledgebase/article/KA-01645/#create-job) section.
+
+### 6. Finish the scheduler job setup
+
+Continue and finish the rest of the job setup as outlined on this page:
+
+https://support.lusid.com/knowledgebase/article/KA-01645/#create-job
 
 
 ### FAQ

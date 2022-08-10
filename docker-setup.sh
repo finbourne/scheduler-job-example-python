@@ -25,6 +25,8 @@ function log_date {
   date -u +"%Y-%m-%dT%H:%M:%SZ"
 }
 
+sudo apt update && sudo apt install jq
+
 apiUrl=$(cat secrets.json | jq -r '.apiUrl')
 schedulerUrl=$(cat secrets.json | jq -r '.schedulerUrl')
 tokenUrl=$(cat secrets.json | jq -r '.tokenUrl')

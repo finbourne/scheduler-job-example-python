@@ -1,7 +1,5 @@
 #!/bin/bash -e
 
-
-
 usage()
 {
   echo

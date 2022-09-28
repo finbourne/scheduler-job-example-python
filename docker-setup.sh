@@ -25,15 +25,13 @@ function log_date {
   date -u +"%Y-%m-%dT%H:%M:%SZ"
 }
 
-sudo apt update && sudo apt install jq
 
-apiUrl=$(cat secrets.json | jq -r '.apiUrl')
-schedulerUrl=$(cat secrets.json | jq -r '.schedulerUrl')
-tokenUrl=$(cat secrets.json | jq -r '.tokenUrl')
-clientId=$(cat secrets.json | jq -r '.clientId')
-clientSecret=$(cat secrets.json | jq -r '.clientSecret')
-username=$(cat secrets.json | jq -r '.username')
-password=$(cat secrets.json | jq -r '.password')
+apiUrl=$(cat secrets.json | jq -er '.api.apiUrl')
+tokenUrl=$(cat secrets.json | jq -er '.api.tokenUrl')
+clientId=$(cat secrets.json | jq -er '.api.clientId')
+clientSecret=$(cat secrets.json | jq -er '.api.clientSecret')
+username=$(cat secrets.json | jq -er '.api.username')
+password=$(cat secrets.json | jq -er '.api.password')
 
 echo "$(log_date): Collecting token from" $tokenUrl
 
@@ -45,27 +43,43 @@ token=$(curl -s -X POST $tokenUrl \
    --data-urlencode scope="openid client groups" \
    --data-urlencode client_id=$clientId \
    --data-urlencode client_secret=$clientSecret \
-    | jq -r '.access_token' ) 
+    | jq -er '.access_token' ) 
 
-echo "$(log_date): Generating commands to generate and push image for: $image_name:$image_version" 
+images_api=$(echo $apiUrl | sed -e "s;api$;scheduler2\/api\/images;")
+echo Token: $token
 
-images_api="{$schedulerUrl}/api/images"
+echo "$(log_date): Determine if image $image_name:$image_version already exists in the repo"
+get_image_status=$(curl -s -X GET $images_api/$image_name:$image_version \
+   -o /dev/null -w "%{http_code}" \
+   -H "Authorization: Bearer $token" \
+   -H "Content-Type: application/json-patch+json")
+
+if [ $get_image_status -eq 200 ]
+then
+  echo "$(log_date): $image_name:$image_version already exists, please choose a new version number"
+
+  exit 1
+fi
+
+echo "$(log_date): Generating commands to generate and push image for: $image_name:$image_version to: $images_api" 
 
 image_commands=$(curl -s -X POST $images_api \
-   -H "Authorization: Bearer "$token \
+   -H "Authorization: Bearer $token" \
    -H "Content-Type: application/json-patch+json" \
    -d "{'imageName':'$image_name:$image_version'}") \
 
-dockerLoginCommand=$(echo $image_commands | jq -r '.dockerLoginCommand')
-buildVersionedDockerImageCommand=$(echo $image_commands | jq -r '.buildVersionedDockerImageCommand')
-tagVersionedDockerImageCommand=$(echo $image_commands | jq -r '.tagVersionedDockerImageCommand')
-pushVersionedDockerImageCommand=$(echo $image_commands | jq -r '.pushVersionedDockerImageCommand')
-tagLatestDockerImageCommand=$(echo $image_commands | jq -r '.tagLatestDockerImageCommand')
-pushLatestDockerImageCommand=$(echo $image_commands | jq -r '.pushLatestDockerImageCommand')
+echo  "$(log_date): $(echo $image_commands | jq -er '.title')"
+
+dockerLoginCommand=$(echo $image_commands | jq -er '.dockerLoginCommand')
+buildVersionedDockerImageCommand=$(echo $image_commands | jq -er '.buildVersionedDockerImageCommand')
+tagVersionedDockerImageCommand=$(echo $image_commands | jq -er '.tagVersionedDockerImageCommand')
+pushVersionedDockerImageCommand=$(echo $image_commands | jq -er '.pushVersionedDockerImageCommand')
+tagLatestDockerImageCommand=$(echo $image_commands | jq -er '.tagLatestDockerImageCommand')
+pushLatestDockerImageCommand=$(echo $image_commands | jq -er '.pushLatestDockerImageCommand')
 
 echo "$(log_date): Running login and build commands" 
 
-# We dont echo this command as it contains an AWS secret
+# We don't echo this command as it contains an AWS secret
 eval $dockerLoginCommand
 echo "$(log_date):" $buildVersionedDockerImageCommand && eval $buildVersionedDockerImageCommand
 

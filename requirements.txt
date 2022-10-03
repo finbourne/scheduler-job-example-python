@@ -1,1 +1,1 @@
-lusid-sdk-preview <= 1.0
+lusid-sdk-preview < 2

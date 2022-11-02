@@ -55,7 +55,7 @@ There are 6 commands you'll need to run to build, push, and tag the image. We ar
 Alternatively, you can run the `docker_setup.sh` script in this directory, which packages the 6 commands together. To run this script, you will need a standard [secrets.json](https://support.lusid.com/knowledgebase/article/KA-01663/#secrets-file) file in the root of this project, then run.
 
 ```
-docker_setup.sh -n scheduler-job-example-python -v 0.0.8
+./docker_setup.sh -n scheduler-job-example-python -v 0.0.8
 ```
 
 The options are as follows:

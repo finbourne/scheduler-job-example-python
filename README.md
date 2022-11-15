@@ -43,19 +43,16 @@ scheduler-job-example-python
 
 Once you're happy with your image, push it up to LUSID. There are two ways:
 
-1. ~~Run the commands one-by-one~~ [Not currently supported]
-2. Use the `docker_setup.sh` script from this directory which has packaged up the relevant commands into one script
-
 #### 3.1 Run the commands one-by-one
 
 There are 6 commands you'll need to run to build, push, and tag the image. We are extending the LUSID UI to generate these commands.
 
 #### 3.2 Run the setup script
 
-Alternatively, you can run the `docker_setup.sh` script in this directory, which packages the 6 commands together. To run this script, you will need a standard [secrets.json](https://support.lusid.com/knowledgebase/article/KA-01663/#secrets-file) file in the root of this project, then run.
+Alternatively, you can run the `docker-setup.sh` script in this directory, which packages the 6 commands together. To run this script, you will need a standard [secrets.json](https://support.lusid.com/knowledgebase/article/KA-01663/#secrets-file) file in the root of this project, then run.
 
 ```
-./docker_setup.sh -n scheduler-job-example-python -v 0.0.8
+./docker-setup.sh -n scheduler-job-example-python -v 0.0.8
 ```
 
 The options are as follows:

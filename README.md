@@ -43,37 +43,19 @@ scheduler-job-example-python
 
 Once you're happy with your image, push it up to LUSID. There are two ways:
 
-1. Run the commands one-by-one
+1. ~~Run the commands one-by-one~~ [Not currently supported]
 2. Use the `docker_setup.sh` script from this directory which has packaged up the relevant commands into one script
 
 #### 3.1 Run the commands one-by-one
 
-There are 6 commands you'll need to run to build, push, and tag the image. There is a feature in the Web Tool which will generate these commands for you. See more details here:
-
-[How do I upload a Docker image to the FINBOURNE AWS store?](https://support.lusid.com/knowledgebase/article/KA-01698/en-us)
-
+There are 6 commands you'll need to run to build, push, and tag the image. We are extending the LUSID UI to generate these commands.
 
 #### 3.2 Run the setup script
 
-Alternatively, you can run the `docker_setup.sh` script in this directory, which packages the 6 commands together. To run this script, you will need a `secrets.json` file in the root of this project which looks as follows:
+Alternatively, you can run the `docker_setup.sh` script in this directory, which packages the 6 commands together. To run this script, you will need a standard [secrets.json](https://support.lusid.com/knowledgebase/article/KA-01663/#secrets-file) file in the root of this project, then run.
 
 ```
-{
-      "apiUrl": "<API_URL>",
-      "schedulerUrl": "<SCHEDULER_URL>",
-      "tokenUrl": "<TOKEN_URL>",
-      "clientId": "<CLIENT_ID>",
-      "clientSecret": "<CLIENT_SECRET>",
-      "username": "<USERNAME>",
-      "password": "<PASSWORD>"
-}
-
-```
-
-With the secrets.json file in place, you can then run:
-
-```
-bash docker_setup.sh -n scheduler-job-example-python -v 0.0.8
+./docker_setup.sh -n scheduler-job-example-python -v 0.0.8
 ```
 
 The options are as follows:
@@ -81,25 +63,14 @@ The options are as follows:
 * `-n` is image name
 * `-v` is image version
 
-
 ### 4. Use the image in a Scheduler job
 
-Once the image is up on LUSID, you can use it when creating a scheduler job.
+Once the image is uploaded to LUSID, you can use it when creating a scheduler job - see instructions at [Creating a Scheduler Job](https://support.lusid.com/knowledgebase/article/KA-01645/#create-job).
 
-See the "Uploading your Docker image" Section of the following guide for [Creating a Scheduler Job](https://support.lusid.com/knowledgebase/article/KA-01645/#create-job).
-
-### 5. Adding LUSID login credentials
-
-As part of the job setup, you'll want to add environment variables with your login credentials. This is what the scheduler will use to authenticate and call the APIs.
-
-See the [Authenticating to the LUSID Python SDK using environment variables](https://support.lusid.com/knowledgebase/article/KA-01645/#create-job) section.
-
-### 6. Finish the scheduler job setup
-
-Continue and finish the rest of the job setup as outlined on this page:
-
-https://support.lusid.com/knowledgebase/article/KA-01645/#create-job
-
+* Under **Uploading your Docker image**, reference the image you uploaded in the previous step
+* There is no need to supply any command line arguments
+* Specify the environment variables as listed [here](https://support.lusid.com/knowledgebase/article/KA-01645/#config-store), if necessary setting up the Configuration Store as described [here](https://support.lusid.com/knowledgebase/article/KA-01645/#upload-credentials)
+* Complete the remaining steps to setup and test the Job
 
 ### FAQ
 

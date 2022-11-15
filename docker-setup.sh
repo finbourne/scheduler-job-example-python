@@ -25,6 +25,7 @@ function log_date {
   date -u +"%Y-%m-%dT%H:%M:%SZ"
 }
 
+# Attempt to authenticate with secrets
 
 apiUrl=$(cat secrets.json | jq -er '.api.apiUrl')
 tokenUrl=$(cat secrets.json | jq -er '.api.tokenUrl')
@@ -32,6 +33,15 @@ clientId=$(cat secrets.json | jq -er '.api.clientId')
 clientSecret=$(cat secrets.json | jq -er '.api.clientSecret')
 username=$(cat secrets.json | jq -er '.api.username')
 password=$(cat secrets.json | jq -er '.api.password')
+
+# If cannot find secrets, use environment variables
+
+[ -z "$apiUrl" ] && apiUrl=${FBN_LUSID_API_URL:-default_value}
+[ -z "$tokenUrl" ] && tokenUrl=${FBN_TOKEN_URL:-default_value}
+[ -z "$clientId" ] && clientId=${FBN_CLIENT_ID:-default_value}
+[ -z "$clientSecret" ] && clientSecret=${FBN_CLIENT_SECRET:-default_value}
+[ -z "$username" ] && username=${FBN_USERNAME:-default_value}
+[ -z "$password" ] && password=${FBN_PASSWORD:-default_value}
 
 echo "$(log_date): Collecting token from" $tokenUrl
 

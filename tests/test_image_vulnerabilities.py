@@ -11,7 +11,7 @@ class TestImageVulnerabilities(unittest.TestCase):
         
     def test_image_vulnerability(self):
 
-        image_name = "abor-data-loader:0.0.1"
+        image_name = "scheduler-job-example-python:latest"
         test_image = self.images_api.get_image(name=image_name)
         high_vulnerability = test_image.scan_report.summary.high
         critical_vulnerability = test_image.scan_report.summary.critical

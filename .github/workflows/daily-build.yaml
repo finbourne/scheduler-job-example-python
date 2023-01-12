@@ -25,7 +25,16 @@ jobs:
         run: |
           pip install --no-cache-dir -r requirements.txt
 
-      - name: Run tests on MASTER branch
+      - name: Build the docker image
+        if: ${{ github.ref == 'refs/heads/master' }}
+        run: |
+            echo "Building the Docker image"
+
+            version=$(date +"%Y%m%d%H%M%S")
+
+            bash docker-setup.sh -n scheduler-job-example-python -v $version
+                      
+      - name: Run unit and integration tests
         if: ${{ github.ref == 'refs/heads/master' }}
         env:
           FBN_TOKEN_URL: ${{ secrets.DEVELOP_FBN_TOKEN_URL }}
@@ -37,10 +46,6 @@ jobs:
           FBN_APP_NAME: ${{ secrets.DEVELOP_FBN_APP_NAME }}
           FBN_SCHEDULER_API_URL: ${{ secrets.DEVELOP_FBN_SCHEDULER_API_URL }}
         run: |
-            echo "env variables have been set"
-
-            version=$(date +"%Y%m%d%H%M%S")
-
-            bash docker-setup.sh -n scheduler-job-example-python -v $version
+            echo "Running the tests..."
           
-            python -m unittest discover -v
+            python -m unittest discover -v tests

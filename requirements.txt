@@ -1,1 +1,3 @@
 lusid-sdk-preview < 2
+lusid-scheduler-sdk-preview==0.0.716
+finbourne-sdk-utilities==0.0.10

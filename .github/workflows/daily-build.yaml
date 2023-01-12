@@ -28,9 +28,12 @@ jobs:
           FBN_CLIENT_SECRET: ${{ secrets.DEVELOP_FBN_CLIENT_SECRET }}
           FBN_LUSID_API_URL: ${{ secrets.DEVELOP_FBN_LUSID_API_URL }}
           FBN_APP_NAME: ${{ secrets.DEVELOP_FBN_APP_NAME }}
+          FBN_SCHEDULER_API_URL: ${{ secrets.DEVELOP_FBN_SCHEDULER_API_URL }}
         run: |
             echo "env variables have been set"
 
             version=$(date +"%Y%m%d%H%M%S")
 
             bash docker-setup.sh -n scheduler-job-example-python -v $version
+          
+            python -m unittest discover -v

@@ -49,4 +49,4 @@ jobs:
         run: |
             echo "Running the tests..."
           
-            python -m unittest discover -v tests
+            python -W ignore -m unittest discover -v tests

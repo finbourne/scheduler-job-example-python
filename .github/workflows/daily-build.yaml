@@ -17,12 +17,13 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-      - uses: "actions/setup-python@v2"
+      - uses: actions/setup-python@v2
         with:
           python-version: "3.7"
 
       - name: Install dependencies
         run: |
+          apt-get update && apt-get -y install jq
           pip install --no-cache-dir -r requirements.txt
 
       - name: Build the docker image

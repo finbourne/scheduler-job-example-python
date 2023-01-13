@@ -45,7 +45,7 @@ jobs:
           FBN_CLIENT_SECRET: ${{ secrets.DEVELOP_FBN_CLIENT_SECRET }}
           FBN_LUSID_API_URL: ${{ secrets.DEVELOP_FBN_LUSID_API_URL }}
           FBN_APP_NAME: ${{ secrets.DEVELOP_FBN_APP_NAME }}
-          FBN_SCHEDULER_API_URL: ${{ secrets.DEVELOP_FBN_BASE_API_URL }}/schedule2
+          FBN_SCHEDULER_API_URL: ${{ secrets.DEVELOP_FBN_BASE_API_URL }}/scheduler2
           FBN_BASE_API_URL: ${{ secrets.DEVELOP_FBN_BASE_API_URL }}
         run: |
             echo "Running the tests..."

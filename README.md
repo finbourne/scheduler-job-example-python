@@ -25,7 +25,7 @@ Two notes on this command:
 docker build . -t scheduler-job-example-python
 ```
 
-Run a container:
+Use the Run command to create container and test your app locally. You must provide credentials.
 
 ```
 docker run \
@@ -45,7 +45,9 @@ Once you're happy with your image, push it up to LUSID. There are two ways:
 
 #### 3.1 Run the commands one-by-one
 
-There are 6 commands you'll need to run to build, push, and tag the image. We are extending the LUSID UI to generate these commands.
+There are 6 commands you'll need to run to build, push, and tag the image. The LUSID UI generates these commands for you to copy when you attempt to add a new image.
+
+ Note: the generated build command may use a different image name than the one you specified in step 1, so adjust all of generated commands accordingly or rebuild your app image using the LUSID-generated build command.
 
 #### 3.2 Run the setup script
 

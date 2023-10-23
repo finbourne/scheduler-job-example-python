@@ -45,7 +45,9 @@ Once you're happy with your image, push it up to LUSID. There are two ways:
 
 #### 3.1 Run the commands one-by-one
 
-There are 6 commands you'll need to run to build, push, and tag the image. We are extending the LUSID UI to generate these commands.
+There are 6 commands you'll need to run to login to AWS, rebuild, push, and tag the image. The LUSID UI generates these commands for you to copy when you attempt to add a new image, and it is recommended you run each of them sequentially.
+
+Note: LUSID will generate a build command that includes your environment prefix in the resulting image name. You must use this command for a successful push. The image you created for testing purposes in step 1 can be disregarded.
 
 #### 3.2 Run the setup script
 

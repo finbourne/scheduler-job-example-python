@@ -45,9 +45,9 @@ Once you're happy with your image, push it up to LUSID. There are two ways:
 
 #### 3.1 Run the commands one-by-one
 
-There are 6 commands you'll need to run to build, push, and tag the image. The LUSID UI generates these commands for you to copy when you attempt to add a new image.
+There are 6 commands you'll need to run to rebuild, push, and tag the image. The LUSID UI generates these commands for you to copy when you attempt to add a new image.
 
- Note: the generated build command may use a different image name than the one you specified in step 1, so adjust all of generated commands accordingly or rebuild your app image using the LUSID-generated build command.
+ Note: LUSID will generate a command to build a new image and include your environment name prefix in the image name. If you wish to use your existing image from step 1, skip that command and adjust all of the remaining LUSID-generated commands accordingly. Otherwise, just run all of the LUSID commands sequentially.
 
 #### 3.2 Run the setup script
 
